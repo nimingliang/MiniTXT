@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="holidays" namespace="/holiday" extends="struts-base">
+   
+    	<action name="findCH" class="holidayAction" method="findCH">
+    		<result>
+    			/main/holiday.jsp
+    		</result>   		
+    	</action>
+  	<action name="findMH" class="holidayAction" method="findMH">
+    		<result>
+    			/main/holiday2.jsp
+    		</result>   		
+    	</action>
+  		<action name="replyHoliday" class="holidayAction" method="replyHoliday">
+    		<result>
+    			/main/reply.jsp
+    		</result>   		
+    	</action>
+    	<action name="audit" class="holidayAction" method="audit">
+    		<result>
+    			/main/audit.jsp
+    		</result>   		
+    	</action>
+    	<action name="doAddReply" class="holidayAction" method="doAddReply">
+    		<result type="json">
+    			<param name="root">resultMap</param>
+    		</result>   		
+    	</action>
+    	<action name="back" class="holidayAction" method="back">
+    		<result name="m" type="redirectAction">
+    			findMH
+    		</result>   
+    		<result name="c" type="redirectAction">
+    			findCH
+    		</result>		
+    	</action>
+    	<action name="replyG" class="holidayAction" method="replyG">
+    		<result type="redirectAction">
+    			findMH
+    		</result>   	
+    	</action>
+    	<action name="replyB" class="holidayAction" method="replyB">
+    		<result type="redirectAction">
+    			findMH
+    		</result>   	
+    	</action>
+    </package>
+
+</struts>

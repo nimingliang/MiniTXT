@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Middle tier application context definition for the image database.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- 加载数据库配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- dataSource -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+		<property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+		<property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+	</bean>
+	<!-- 创建sessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" >
+		<property name="dataSource" >
+			<ref bean="dataSource"/>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/oa/entity/User.hbm.xml</value>
+				<value>com/oa/entity/Holiday.hbm.xml</value>
+				<value>com/oa/entity/Mail.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置声明式事务 -->
+		<!-- 创建事务管理器 -->
+	<bean id="myTransaction" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 创建一个事务advice-->
+		<tx:advice id="txAdvice" transaction-manager="myTransaction">
+			<tx:attributes>
+				<tx:method name="add*" propagation="REQUIRED"/>
+				<tx:method name="update*" propagation="REQUIRED"/>
+				<tx:method name="delete*" propagation="REQUIRED"/>
+				<tx:method name="do*" propagation="REQUIRED"/>
+				<tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+			</tx:attributes>
+		</tx:advice>
+		<aop:config proxy-target-class="true">
+			<aop:pointcut expression="execution(* ssh3.service.*.*(..))" id="bizMethods"/>
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="bizMethods"/>
+		</aop:config>
+</beans>

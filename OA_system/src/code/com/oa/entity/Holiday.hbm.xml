@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+	package="com.oa.entity">
+	<class name="Holiday" table="holiday">
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="beginTime" column="begin_time" type="java.util.Date"/>
+		<property name="endTime" column="end_time" type="java.util.Date"/>
+		<property name="status" column="status" type="java.lang.Integer"/>
+		<property name="reason" column="reason" type="java.lang.String"/>
+		<property name="replyId" column="reply_uid" type="java.lang.Integer"/>
+		<property name="auditId" column="audit_uid" type="java.lang.Integer"/>
+		<property name="replyName" column="replyName" type="java.lang.String"/>
+		<property name="days" column="days" type="java.lang.Integer"/>
+	</class>
+		
+</hibernate-mapping>

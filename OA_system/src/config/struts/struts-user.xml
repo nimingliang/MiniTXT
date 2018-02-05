@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="admins" namespace="/admin" extends="struts-base">
+    	<action name="login" class="userAction" method="login">
+    		<result type="json">
+    			<param name="root">resultMap</param>
+    		</result>   		
+    	</action>
+  	
+  		<action name="userInfo" class="userAction" method="userInfo">
+    		<result>
+    			/main/userInfo.jsp
+    		</result>   		
+    	</action>
+    	<action name="userInfo2" class="userAction" method="userInfo">
+    		<result>
+    			/main/myInfo.jsp
+    		</result>   		
+    	</action>
+    	<action name="loginOut" class="userAction" method="loginOut">
+    		<result type="redirect">
+    			/login.jsp
+    		</result>   		
+    	</action>
+    	<action name="toEditUser" class="userAction" method="toEditUser">
+    		<result>
+    			/main/editUser.jsp
+    		</result>   		
+    	</action>
+    	<action name="toEditUser2" class="userAction" method="toEditUser">
+    		<result>
+    			/main/editNP.jsp
+    		</result>   		
+    	</action>
+    	<action name="doUpdateUser" class="userAction" method="doUpdateUser">
+    		<result type="json">
+    			<param name="root">resultMap</param>
+    		</result>   		
+    	</action>
+    	<action name="doUpdateUser2" class="userAction" method="doUpdateUser2">
+    		<result type="json">
+    			<param name="root">resultMap</param>
+    		</result>   		
+    	</action>
+    	<action name="doAddUser" class="userAction" method="doAddUser">
+    		<result type="json">
+    			<param name="root">resultMap</param>
+    		</result>   		
+    	</action>
+    	<action name="findAllUser" class="userAction" method="findAllUser">
+    		<result>
+    			/main/editMail.jsp
+    		</result>
+    	</action>
+    	<action name="findUserList" class="userAction" method="findAllUser2">
+    		<result>
+    			/main/userList.jsp
+    		</result>
+    	</action>
+    </package>
+
+</struts>

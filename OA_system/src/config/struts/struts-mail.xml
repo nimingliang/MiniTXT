@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="mails" namespace="/mail" extends="struts-base">
+    
+  	<action name="doSendMail" class="mailAction" method="doSendMail">
+  			<result type="json">
+		  		<param name="root">resultMap</param>
+		  	</result>
+  			<interceptor-ref name="fileUpload">
+      <param name="maximumSize">3000000</param>
+      <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png, image/pjpeg</param>
+      </interceptor-ref>
+      <interceptor-ref name="defaultStack"></interceptor-ref>  	
+  	</action>
+  	<action name="findMail" class="mailAction" method="findMail">
+  	<result>
+  		/main/myMail.jsp
+  	</result>
+  	</action>
+  	<action name="findRubMail" class="mailAction" method="findMail">
+  	<result>
+  		/main/rubMail.jsp
+  	</result>
+  	</action>
+  	<action name="mailInfo" class="mailAction" method="mailInfo">
+  	<result>
+  		/main/mailInfo.jsp
+  	</result>
+  	</action>
+  	<action name="updateIsread" class="mailAction" method="updateIsread">
+  	<result type="json">
+  		<param name="root">resultMap</param>
+  	</result>
+  	</action>
+  	<action name="updateStatus" class="mailAction" method="updateStatus">
+  	<result type="json">
+  		<param name="root">resultMap</param>
+  	</result>
+  	</action>
+  	<action name="deleteMail" class="mailAction" method="deleteMail">
+  	<result type="json">
+  		<param name="root">resultMap</param>
+  	</result>
+  	</action>
+    </package>
+
+</struts>

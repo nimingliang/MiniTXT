@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping 
+	package="com.oa.entity">
+	<class name="Mail" table="mail">
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="title" column="title" type="java.lang.String"/>
+		<property name="content" column="content" type="java.lang.String"/>
+		<property name="isread" column="isread" type="java.lang.Integer"/>
+		<property name="sendTime" column="sendtime" type="java.util.Date"/>
+		<property name="adjunctPath" column="adjunctPath" type="java.lang.String"/>
+		<property name="from_uid" column="from_uid" type="java.lang.Integer"/>
+		<property name="to_uid" column="to_uid" type="java.lang.Integer"/>
+		<property name="toStatu" column="to_statu" type="java.lang.Integer"/>
+		<property name="fromStatu" column="from_statu" type="java.lang.Integer"/>
+		
+		<!-- <many-to-one name="userToUid" class="User" fetch="join" lazy="false">
+            <column name="TO_UID" />
+        </many-to-one>
+        <many-to-one name="userFromUid" class="User" fetch="join" lazy="false">
+            <column name="FROM_UID" />
+        </many-to-one> -->
+	</class>
+		
+</hibernate-mapping>

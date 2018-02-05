@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Middle tier application context definition for the image database.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<import resource="daoContext.xml"/>
+	<bean id="baseService" class="com.oa.service.impl.BaseService" abstract="true">
+		<property name="userDao" ref="userDao"></property>
+		<property name="mailDao" ref="mailDao"></property>
+		<property name="holidayDao" ref="holidayDao"></property>
+	</bean>
+	<bean id="userService" class="com.oa.service.impl.UserServiceImpl" parent="baseService"/>
+	<bean id="mailService" class="com.oa.service.impl.MailServiceImpl" parent="baseService"/>
+	<bean id="holidayService" class="com.oa.service.impl.HolidayServiceImpl" parent="baseService"/>
+	</beans>
