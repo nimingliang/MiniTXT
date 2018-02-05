@@ -1,0 +1,13 @@
+admin|admin|0
+zwy|zwy|1
+test|123|1
+test|123|1
+test|test|1
+sa|123|1
+t12|123|1
+aaa|123|1
+t13|123|1
+t13|123|1
+t14|123|1
+zhangsan|123|1
+t16|123|1
